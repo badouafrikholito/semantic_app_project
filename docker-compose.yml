@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  chroma:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.chroma
+    container_name: chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma  # FIXED PATH
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.app
+    container_name: semantic_app
+    depends_on:
+      - chroma
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CHROMA_HOST=chroma  # ADD THIS
+      - CHROMA_PORT=8000    # ADD THIS
+    ports:
+      - "8001:8001"
+    networks:
+      - app-network
+
+  ui:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ui
+    container_name: semantic_ui
+    depends_on:
+      - app
+    ports:
+      - "8501:8501"
+    environment:
+      - API_HOST=http://app:8001  # FIXED - REMOVED COMMENT
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  chroma_data:

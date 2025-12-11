@@ -1,0 +1,3 @@
+# Minimal Dockerfile that uses the official chromadb image
+FROM chromadb/chroma:latest
+# The official image will run the chroma server on port 8000 by default.

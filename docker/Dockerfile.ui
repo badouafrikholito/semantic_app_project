@@ -1,0 +1,14 @@
+# Dockerfile for Streamlit UI
+FROM python:3.10-slim
+
+WORKDIR /workspace
+
+COPY . /workspace
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+EXPOSE 8501
+
+# Use environment variable to point UI to API when running in docker-compose
+CMD ["streamlit", "run", "ui/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
