@@ -1,0 +1,10 @@
+Machine learning improves decision making using data.
+Transformers changed the field of NLP.
+Semantic search retrieves information using embeddings.
+Vector databases store high-dimensional vectors.
+Docker helps deploy ML applications consistently.
+Sentence-BERT (MiniLM) is good for small scale semantic search.
+FastAPI provides a lightweight API for ML services.
+Streamlit makes simple UIs quickly for demos.
+Preprocessing includes cleaning, tokenization and normalization.
+Embedding storage enables similarity-based retrieval.
